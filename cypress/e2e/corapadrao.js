@@ -45,7 +45,7 @@ describe('Automação Cora', function () {
     it('Detalhes Cliente', () => {
         detalhesCliente.clickGeografia('1 - Geo SUL');
         detalhesCliente.clicksearchCDD()
-        detalhesCliente.clickUnidade('50 - CDD SAO JOSE')
+        detalhesCliente.clickUnidade('107000 - OVIDIO - PARANAIBA')
         detalhesCliente.clicksearchUnidade()
         detalhesCliente.clickCliente('77')
         detalhesCliente.clickAplicarButton('Aplicar')
