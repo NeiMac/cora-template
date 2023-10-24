@@ -1,5 +1,3 @@
-Teste
-
 # Comandos básicos
 
 Instalando as dependências
