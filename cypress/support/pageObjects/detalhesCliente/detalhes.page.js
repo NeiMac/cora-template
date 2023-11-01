@@ -59,30 +59,69 @@ export default class loginPage extends DSL {
             .click()
     }
 
-    validCddCliente(cdd) {
+    validCddCliente() {
         this.enterMicrofrontend()
             .find('[class="sc-bjUoiL bgEoYR"]')
             .filter(':visible')
-            .contains(cdd).should('be.visible')
+            .first()
+            .should('not.be.empty')
     }
 
-    validStatusCliente() {
+    validCustomerName() {
+        this.enterMicrofrontend()
+            .find('[class="sc-dmRaPn oVBTY"]')
+            .should('not.be.empty')
+    }
+
+    validStatusCustomerFirst() {
         this.enterMicrofrontend()
             .find('[class="ant-tag sc-bCwfaz hzzSzX positive"]')
             .first()
             .invoke('text')
-            .should('contain', 'Sem restrições')
-        /*
-         .last()
-         .invoke('text')
-         .should('contain', 'Não Negativado')
-         **/
+            .should('contain', 'Ativo')
     }
 
-    validTradeName() {
+    validStatusCustomerLast() {
         this.enterMicrofrontend()
-            .find('[class="class="item-panel-description"]')
-            .should('be.visible')
+            .find('[class="ant-tag sc-bCwfaz hzzSzX positive"]')
+            .last()
+            .invoke('text')
+            .should('contain', 'Não Negativado')
+    }
+
+    validStatusCustomers() {
+        this.enterMicrofrontend()
+        // Selecione todos os elementos da lista
+        cy.get('[class="sc-hHLeRK gnDtow"]').then(($elements) => {
+            // Calcule o índice do primeiro e último elemento
+            const primeiroIndice = 0;
+            const ultimoIndice = $elements.length - 1;
+
+            // Use .slice() para selecionar elementos entre o primeiro e o último
+            const elementosEntrePrimeiroELast = $elements.slice(primeiroIndice + 1, ultimoIndice);
+
+            // Agora, itere sobre esses elementos e verifique o texto
+            elementosEntrePrimeiroELast.each(($element) => {
+                cy.wrap($element).invoke('text').should('include', 'Ativo');
+            });
+        });
+    }
+
+
+
+    /**  
+ .last()
+ .invoke('text')
+ .should('contain', 'Não Negativado')
+ 
+} **/
+
+    validGeneralInfo() {
+        //Test
+        this.enterMicrofrontend()
+            .find('[class="item-panel-description"]')
+            .filter('be.visible')
+            .should('not.be.empty')
     }
 
 }

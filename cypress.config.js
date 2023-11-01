@@ -111,6 +111,7 @@ module.exports = defineConfig({
     },
     specPattern: "cypress/e2e/**/*.js",
     baseUrl: 'https://cora-stg.ambevdevs.com.br/',
+    includeShadowDom: true,
     chromeWebSecurity: false,
     defaultCommandTimeout: 20000,
     viewportWidth: 1920,

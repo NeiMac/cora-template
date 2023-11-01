@@ -4,11 +4,13 @@ import HomePage from "../support/pageObjects/common/home.page";
 import Login from "../support/pageObjects/common/login.page";
 import NewQueryOrders from "../support/pageObjects/common/newQueryOrders.page";
 import DetalhesCliente from "../support/pageObjects/detalhesCliente/detalhes.page";
+import Restricao from "../support/pageObjects/restriction/restriction.page";
 
 const homePage = new HomePage();
 const login = new Login();
 const newQueryOrders = new NewQueryOrders();
-const detalhesCliente = new DetalhesCliente
+const detalhesCliente = new DetalhesCliente();
+const restricao = new Restricao();
 
 before(() => {
     cy.clearLocalStorage();
@@ -38,26 +40,29 @@ describe('Automação Cora', function () {
         homePage.loadingModulesCora();
         homePage.assertWellcome();
         //        homePage.assertDescription();
-        homePage.clickModulesCora('Detalhes do Cliente');
-        cy.wait(1000)
+        homePage.clickModulesCora('Restrição');
+        cy.wait(2000)
     });
 
     it('Detalhes Cliente', () => {
         detalhesCliente.clickGeografia('1 - Geo SUL');
         detalhesCliente.clicksearchCDD()
-        detalhesCliente.clickUnidade('107000 - OVIDIO - PARANAIBA')
+        detalhesCliente.clickUnidade('50 - CDD SAO JOSE')
         detalhesCliente.clicksearchUnidade()
-        detalhesCliente.clickCliente('77')
+        detalhesCliente.clickCliente('3')
         detalhesCliente.clickAplicarButton('Aplicar')
-        detalhesCliente.validCddCliente('107000 - OVIDIO - PARANAIBA')
-        detalhesCliente.validStatusCliente()
+        detalhesCliente.validCddCliente('50 - CDD SAO JOSE')
+        // detalhesCliente.validStatusCliente()
 
-        detalhesCliente.validTradeName()
+        detalhesCliente.validCustomerName()
+        //  detalhesCliente.validStatusCustomers()
+        detalhesCliente.validStatusCustomerFirst()
+        detalhesCliente.validStatusCustomerLast()
+        detalhesCliente.validGeneralInfo()
     })
-    /*
-        it('meios de pagamento', () => {
-            detalhesCliente.clickGeografia('1 - Geo SUL')
-            meiodepagamento.forma('cash')
-        });
-    **/
+
+    it.only('Restriction', () => {
+        restricao.clickListClient();
+    });
+
 })

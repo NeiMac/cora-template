@@ -8,7 +8,7 @@ import DetalhesCliente from "../support/pageObjects/detalhesCliente/detalhes.pag
 const homePage = new HomePage();
 const login = new Login();
 const newQueryOrders = new NewQueryOrders();
-const detalhesCliente = new DetalhesCliente();
+const detalhesCliente = new DetalhesCliente
 
 before(() => {
     cy.clearLocalStorage();
@@ -27,36 +27,37 @@ beforeEach(() => {
     })
 })
 
+
+
 describe('Automação Cora', function () {
+
     beforeEach(() => {
         login.urlCora();
         login.clickAmbevButton();
-        // cy.wait(15000)
-        // login.urlCoraDetalhes();
 
         homePage.loadingModulesCora();
         homePage.assertWellcome();
-        homePage.assertDescription();
-        homePage.clickModulesCora('Detalhes do Cliente');
-        cy.wait(1000)
+        //        homePage.assertDescription();
+        //homePage.clickModulesCora('Detalhes do Cliente');
+        cy.wait(2000)
+    });
 
+    it('Detalhes Cliente', () => {
         detalhesCliente.clickGeografia('1 - Geo SUL');
         detalhesCliente.clicksearchCDD()
-        detalhesCliente.clickUnidade('107000 - OVIDIO - PARANAIBA')
+        detalhesCliente.clickUnidade('50 - CDD SAO JOSE')
         detalhesCliente.clicksearchUnidade()
-        detalhesCliente.clickCliente('77')
+        detalhesCliente.clickCliente('3')
         detalhesCliente.clickAplicarButton('Aplicar')
+        detalhesCliente.validCddCliente('50 - CDD SAO JOSE')
+        // detalhesCliente.validStatusCliente()
 
-    });
-
-    it('Acesso aos módulos da cora', function () {
-        detalhesCliente.validCddCliente('107000 - OVIDIO - PARANAIBA')
-        detalhesCliente.validStatusCliente()
+        detalhesCliente.validTradeName()
     })
-
     /*
-    it('Acesso aos meios de pagamento', () => {
-        detalhesCliente.meiosPagamento()
-    });
+        it('meios de pagamento', () => {
+            detalhesCliente.clickGeografia('1 - Geo SUL')
+            meiodepagamento.forma('cash')
+        });
     **/
 })
